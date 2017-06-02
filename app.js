@@ -7,6 +7,8 @@ var bodyParser = require('body-parser');
 var hbs = require('hbs');
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var compression = require('compression');
+var sassMiddleware = require('node-sass-middleware');
 
 var app = express();
 
@@ -19,7 +21,18 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+// app.use(require('less-middleware')(path.join(__dirname, 'public')));
+app.use(sassMiddleware({
+    /* Options */
+    src: __dirname,
+    dest: path.join(__dirname, 'public'),
+    debug: true,
+    outputStyle: 'compressed',
+    prefix:  '/prefix'  // Where prefix is at <link rel="stylesheets" href="prefix/style.css"/>
+}));
 app.use(express.static(path.join(__dirname, 'public')));
+app.use( '/bower_components', express.static( __dirname + '/bower_components' ) );
+app.use( compression() );
 
 app.use( function ( req, res, next ) {
     res.header( "Access-Control-Allow-Origin", "*" );
