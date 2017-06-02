@@ -1,2 +1,18 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+{{#extend "meta"}}
+
+<meta name="changeset-scope/config/environment" content="{{config.emberConfig}}" />
+{{/extend}}
+
+{{#extend "stylesheets"}}
+
+<link rel="stylesheet" href="https://epeblob.blob.core.windows.net/changeset-scope/assets/vendor-d41d8cd98f00b204e9800998ecf8427e.css">
+<link rel="stylesheet" href="https://epeblob.blob.core.windows.net/changeset-scope/assets/changeset-scope-0580da37f4276eb51c85ec0e46a553f0.css">
+
+{{/extend}}
+
+{{#extend "scripts"}}
+<script src="https://epeblob.blob.core.windows.net/changeset-scope/assets/vendor-16ee0740c4d986a6cee119caacca3017.js"></script>
+<script src="https://epeblob.blob.core.windows.net/changeset-scope/assets/changeset-scope-670a891c25209c0130b20359b798be5d.js"></script>
+
+
+{{/extend}}

@@ -4,7 +4,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
+var hbs = require('hbs');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 
@@ -20,6 +20,31 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use( function ( req, res, next ) {
+    res.header( "Access-Control-Allow-Origin", "*" );
+    res.header( "Access-Control-Allow-Methods", "GET, PUT, POST, DELETE" );
+    res.header( "Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization" );
+    next();
+} );
+
+//HELPER BLOCKS
+var blocks = {};
+
+hbs.registerHelper( 'extend', function ( name, context ) {
+    var block = blocks[name];
+    if ( !block ) {
+        block = blocks[name] = [];
+    }
+
+    block.push( context.fn( this ) );
+} );
+
+hbs.registerHelper( 'block', function ( name ) {
+    var val = (blocks[name] || []).join( '\n' );
+    blocks[name] = [];
+    return val;
+} );
 
 app.use('/', routes);
 app.use('/users', users);

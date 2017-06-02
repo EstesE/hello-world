@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+{{!--<!DOCTYPE html>
 <html>
   <head>
     <title>{{title}}</title>
@@ -7,4 +7,21 @@
   <body>
     {{{body}}}
   </body>
+</html>--}}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>{{ title }}</title>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=0">
+    {{{block "head"}}}
+    {{{block "meta"}}}
+    {{{block "stylesheets"}}}
+</head>
+<body class="backdrop with-top-navbar" style>
+{{{body}}}
+{{{block "scripts"}}}
+</body>
 </html>
